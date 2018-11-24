@@ -6,23 +6,29 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
   public static void main(String[] args) {
     try{
       MyString test = new MyString(args[0]);
-      System.out.println("Testing Constructor and toString()... Expected: the inputted string \n" + test + "\n");
+      System.out.println("Testing Constructor and toString()... Expected: the inputted string \n \n" + test + "\n");
       System.out.println("Testing charAt() and length()... Expected: the characters of the string seperated by commas" + "\n");
       for (int x = 0; x < test.length(); x++){
         System.out.print(test.charAt(x) + ", ");
       }
-      System.out.println("\nTesting subSequence() (only works if the input is longer than 2 characters)... Expected: ordered subsequences(size 2) ofthe String. Ex: cat --> ca, at, " + "\n");
+      System.out.println("\n \nTesting subSequence() (only works if the input is longer than 2 characters)... Expected: ordered subsequences(size 2) ofthe String. Ex: cat --> ca, at, " + "\n");
       for (int i = 0; i < args[0].length() - 1; i++){
         System.out.print(test.subSequence(i,i+2) + ", ");
       }
-      System.out.println("\nTesting compareTo() ... Expected: 1 , 0, -1 , error message, 1, 0, error message, -1");
-      System.out.println("\nTesting");
+      MyString one = new MyString("yolo");
+      MyString two = new MyString("yo");
+      System.out.println("\n \nTesting compareTo() ... Expected: 1 , 0, -1" );
+      System.out.println(one.compareTo(two));
+      System.out.println(two.compareTo(two));
+      System.out.println(two.compareTo(one));
+
+      // Sandbox for Testing exceptions
+      MyString yo = new MyString("yolo");
+      yo.charAt(-1);
     } catch (IndexOutOfBoundsException e){
       System.out.println("Inputted index is out of bounds");
     } catch (NullPointerException e){
       System.out.println("Object is null");
-    } catch (ClassCastException e){
-      System.out.println("specified object's type prevents it from being compared to this object.");
     }
   }
 
@@ -58,22 +64,28 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
   }
 
   public int compareTo(CharSequence o){
+    //finding the shortest length so that we only loop through up to the shortest word
     int length = 0;
     if (o.length() >= length()){
       length = length();
     } else {length = o.length();}
+    //starting at the start of each word
     for(int i = 0; i < length; i++){
+      //if character @ i is greater than other, than the entire string is greater
       if(o.charAt(i) < charAt(i)){
         return 1;
       } else if (o.charAt(i) > charAt(i)){
         return -1;}
+      // if we are at the last letter of the shortest word and its still the same, the longer word is greater
       if (i == length - 1){
         if (length() > o.length()){
           return 1;
+        } else if (length() < o.length()){
+          return -1;
         }
-        return -1;
       }
       }
+    // if not they're equal
     return 0;
     }
 }
