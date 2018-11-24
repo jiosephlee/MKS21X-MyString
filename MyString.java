@@ -24,15 +24,18 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
 
       // Sandbox for Testing exceptions
       MyString yo = new MyString("yolo");
-      yo.charAt(-1);
-    } catch (IndexOutOfBoundsException e){
-      System.out.println("Inputted index is out of bounds");
-    } catch (NullPointerException e){
-      System.out.println("Object is null");
+      MyString yol = new MyString(null);
+      yol.compareTo(yo);
+    } catch (ArrayIndexOutOfBoundsException e){
+      System.out.println("please input an argument");
     }
   }
 
   public MyString (CharSequence s){
+    if (s == null){
+      System.out.println("Object cannot be null");
+      System.exit(0);
+    }
     data = new char[s.length()];
     for (int i = 0; i < s.length(); i++){
       data[i] = s.charAt(i);
@@ -40,6 +43,10 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
   }
 
   public char charAt(int index){
+    if (index >= length() || index < 0){
+      System.out.println("Index is out of bounds");
+      System.exit(0);
+    }
     return data[index];
   }
 
@@ -56,6 +63,10 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
   }
 
   public CharSequence subSequence(int start, int end){
+    if (start < 0 || start >= length() || end < 0 || end > length()){
+      System.out.println("Index is out of bounds");
+      System.exit(0);
+    }
     String output = "";
     for (int i = start; i < end; i++){
       output += data[i];
@@ -64,6 +75,10 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
   }
 
   public int compareTo(CharSequence o){
+    if (this == null){
+      System.out.println("Object cannot be null");
+      System.exit(0);
+    }
     //finding the shortest length so that we only loop through up to the shortest word
     int length = 0;
     if (o.length() >= length()){
