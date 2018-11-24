@@ -14,6 +14,10 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
       System.out.println("Testing");
     } catch (IndexOutOfBoundsException e){
       System.out.println("Inputted index is out of bounds");
+    } catch (NullPointerException e){
+      System.out.println("Object is null");
+    } catch (ClassCastException e){
+      System.out.println("specified object's type prevents it from being compared to this object.");
     }
   }
 
@@ -46,5 +50,17 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
       output += data[i];
     }
     return output;
+  }
+
+  public int compareTo(CharSequence o){
+    int length = 0;
+    if (o.length() >= length()){
+      length = length();
+    } else {length = o.length();}
+    for(int i = 0; i < length; i++){
+      if(o.charAt(i) > charAt(i)){
+        return 
+      }
+    }
   }
 }
