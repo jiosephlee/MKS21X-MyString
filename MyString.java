@@ -44,8 +44,7 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
 
   public char charAt(int index){
     if (index >= length() || index < 0){
-      System.out.println("Index is out of bounds");
-      System.exit(0);
+      throw new StringIndexOutOfBoundsException();
     }
     return data[index];
   }
@@ -63,9 +62,8 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
   }
 
   public CharSequence subSequence(int start, int end){
-    if (start < 0 || start >= length() || end < 0 || end > length()){
-      System.out.println("Index is out of bounds");
-      System.exit(0);
+    if (start < 0 || start >= length() || end < 0 || end > length() || start > end){
+      throw new IndexOutOfBoundsException();
     }
     String output = "";
     for (int i = start; i < end; i++){
@@ -76,8 +74,7 @@ public class MyString implements CharSequence,Comparable<CharSequence>{
 
   public int compareTo(CharSequence o){
     if (this == null){
-      System.out.println("Object cannot be null");
-      System.exit(0);
+      throw new NullPointerException();
     }
     //finding the shortest length so that we only loop through up to the shortest word
     int length = 0;
